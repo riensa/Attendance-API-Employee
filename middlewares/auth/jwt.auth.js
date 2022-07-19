@@ -1,6 +1,8 @@
 const jwt = require("jsonwebtoken");
 const DB = require("../../models");
+
 const AdminsDB = DB.admins;
+const EmployeesDB = DB.employees;
 
 const verifyToken = (req, res, next) => {
   if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {
@@ -20,8 +22,16 @@ const verifyToken = (req, res, next) => {
 				next()
 			} else {
 
-				AdminsDB.findOne({ where: {id: decode.id} })
+				let UserDB;
+				if(decode.user_type == 'E') {
+					UserDB = EmployeesDB
+				} else if (decode.user_type == 'A') {
+					UserDB = AdminsDB
+				}
+
+				UserDB.findOne({ where: {id: decode.id} })
 					.then(data => {
+						data.dataValues.user_type = decode.user_type
 						req.user = data;
 						next()
 					})

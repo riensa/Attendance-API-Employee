@@ -1,13 +1,10 @@
-exports.create = async (req, res) => {
+exports.info = async (req, res) => {
 	try {
 		return res.send({
 			status: 200,
 			success: true,
-			message: "New Employee Created!",
-			data: {
-				username: req.body.username,
-				fullname: req.body.fullname
-			}
+			message: "Fetch Profile Info Successfully",
+			data: {}
 		})
 
 	} catch (error) {

@@ -1,12 +1,12 @@
 const {check, validationResult} = require('express-validator');
 
 exports.validateLogin = [
-    check('username')
+    check('email')
 			.trim()
 			.escape()
 			.not()
 			.isEmpty()
-			.withMessage('Username can not be empty!'),
+			.withMessage('Email can not be empty!'),
     check('password')
 			.trim()
 			.escape()

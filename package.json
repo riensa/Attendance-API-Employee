@@ -1,7 +1,7 @@
 {
-  "name": "api-admin",
+  "name": "api-employee",
   "version": "1.0.0",
-  "description": "WFH Employee Attendance Application - API Admin",
+  "description": "WFH Employee Attendance Application - API Employee",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/riensa/Attendance-API-Login.git"
+    "url": "git+https://github.com/riensa/Attendance-API-Employee.git"
   },
   "keywords": [
     "node.js",
@@ -21,9 +21,9 @@
   "author": "Endah Sari",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/riensa/Attendance-API-Login/issues"
+    "url": "https://github.com/riensa/Attendance-API-Employee/issues"
   },
-  "homepage": "https://github.com/riensa/Attendance-API-Login#readme",
+  "homepage": "https://github.com/riensa/Attendance-API-Employee#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",

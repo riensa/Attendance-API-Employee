@@ -6,6 +6,10 @@ const ProfileValidator = require('../middlewares/validators/profile.validator.js
 const VerifyToken = require('../middlewares/auth/jwt.auth.js');
 
 router.use(VerifyToken)
-router.get("/info", ProfileValidator.validateEmployeeInfo, ProfileController.info);
+router.get("/", ProfileValidator.validateSessionAdmin, ProfileController.findAll);
+router.get("/detail/:id", ProfileValidator.validateSession, ProfileController.findOne);
+router.post("/", ProfileValidator.validateEmployee, ProfileController.create);
+router.put("/", ProfileValidator.validateEmployeeUpdate, ProfileController.update);
+router.put("/password", ProfileValidator.validateEmployeePassword, ProfileController.password);
 
 module.exports = router;

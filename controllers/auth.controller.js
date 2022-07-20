@@ -41,7 +41,7 @@ exports.login = async (req, res) => {
 		//signing token with user id
 		var token = jwt.sign({
 			id: employee.id,
-			user_type: 'E'
+			group: employee.group
 		}, process.env.API_SECRET, {
 			expiresIn: 86400
 		});

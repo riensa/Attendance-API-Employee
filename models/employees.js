@@ -34,6 +34,11 @@ module.exports = (sequelize, Sequelize) => {
 				allowNull: false,
 				type: Sequelize.INTEGER
 			},
+			group: {
+				allowNull: true,
+				type: Sequelize.CHAR,
+				defaultValue: 'E',
+			},
 			status: {
 				type: Sequelize.ENUM,
 				values: ['active', 'inactive'],

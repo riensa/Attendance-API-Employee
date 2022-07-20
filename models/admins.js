@@ -18,6 +18,11 @@ module.exports = (sequelize, Sequelize) => {
 				allowNull: false,
 				type: Sequelize.STRING
 			},
+			group: {
+				allowNull: true,
+				type: Sequelize.CHAR,
+				defaultValue: 'A',
+			},
 			status: {
 				type: Sequelize.ENUM,
 				values: ['active', 'inactive'],

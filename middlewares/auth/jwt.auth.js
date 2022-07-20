@@ -23,15 +23,14 @@ const verifyToken = (req, res, next) => {
 			} else {
 
 				let UserDB;
-				if(decode.user_type == 'E') {
+				if(decode.group == 'E') {
 					UserDB = EmployeesDB
-				} else if (decode.user_type == 'A') {
+				} else if (decode.group == 'A') {
 					UserDB = AdminsDB
 				}
 
 				UserDB.findOne({ where: {id: decode.id} })
 					.then(data => {
-						data.dataValues.user_type = decode.user_type
 						req.user = data;
 						next()
 					})

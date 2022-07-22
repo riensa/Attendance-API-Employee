@@ -1,0 +1,1645 @@
+{
+	"info": {
+		"_postman_id": "66881425-a9a6-41e3-8378-abcab4c44a5f",
+		"name": "API Employee",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7850168"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse(responseBody);",
+									"const accessToken = \"JWT \" + jsonData.data.accessToken",
+									"pm.globals.set(\"employee_token\", accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "johndoe@office.com",
+									"description": "required",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "new01Jan2000",
+									"description": "required",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host_employee}}auth/login",
+							"host": [
+								"{{host_employee}}auth"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Validation Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"description": "required",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host_employee}}auth/login",
+									"host": [
+										"{{host_employee}}auth"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "234"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ea-gJtzuEKnVRPYKJg5+AxgQkPLU5s\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 19 Jul 2022 16:45:17 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"success\": false,\n    \"message\": \"Validation Error\",\n    \"errors\": [\n        {\n            \"value\": \"\",\n            \"msg\": \"Email can not be empty!\",\n            \"param\": \"email\",\n            \"location\": \"body\"\n        },\n        {\n            \"value\": \"\",\n            \"msg\": \"Password can not be empty!\",\n            \"param\": \"password\",\n            \"location\": \"body\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "User Not Found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "youngdoe@office.com",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "youngpass",
+											"description": "required",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host_employee}}auth/login",
+									"host": [
+										"{{host_employee}}auth"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "170"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"aa-2W8NchTG3rCkoffRAk09NJWMiVU\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 19 Jul 2022 16:46:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"success\": false,\n    \"message\": \"Validation Error\",\n    \"errors\": [\n        {\n            \"value\": \"youngdoe@office.com\",\n            \"msg\": \"Invalid email or password\",\n            \"param\": \"email\",\n            \"location\": \"body\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Invalid Password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "johndoe@office.com",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "01Jan2001",
+											"description": "required",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host_employee}}auth/login",
+									"host": [
+										"{{host_employee}}auth"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "169"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a9-yMim54aqKPB1nUXlR57dwiabOOs\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 19 Jul 2022 16:47:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"success\": false,\n    \"message\": \"Validation Error\",\n    \"errors\": [\n        {\n            \"value\": \"johndoe@office.com\",\n            \"msg\": \"Invalid email or password\",\n            \"param\": \"email\",\n            \"location\": \"body\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "johndoe@office.com",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "01Jan2000",
+											"description": "required",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host_employee}}auth/login",
+									"host": [
+										"{{host_employee}}auth"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "308"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"134-ccB8zSTWHpKdCF8ab6DPZ0i2V7s\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 19 Jul 2022 16:47:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"success\": true,\n    \"message\": \"Login Successfull\",\n    \"data\": {\n        \"employee\": {\n            \"email\": \"johndoe@office.com\",\n            \"fullname\": \"John Doe\"\n        },\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl90eXBlIjoiRSIsImlhdCI6MTY1ODI0OTI1NSwiZXhwIjoxNjU4MzM1NjU1fQ.sFtuBCK3GmJdZh-t8DXnQIJVcR9kJBcWNx9LtIcRV3k\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Profile",
+			"item": [
+				{
+					"name": "All Employee - Admin Only",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host_employee}}profile",
+							"host": [
+								"{{host_employee}}profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "SUCCESS",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host_employee}}profile",
+									"host": [
+										"{{host_employee}}profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "804"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"324-/Hs1WYBUFApXgGaPAJwZxuwqLfY\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 Jul 2022 03:30:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"success\": true,\n    \"message\": \"Fetch All Employee Successfully\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"fullname\": \"John Doe\",\n            \"dob\": \"2000-01-01T07:30:00.000Z\",\n            \"email\": \"johndoe@office.com\",\n            \"password\": \"$2b$08$aPESJSwUx1lUy/rxT3foUe8NJyPDDA.qeDfvhvTEOVOjp75olr7dC\",\n            \"password_reset_date\": \"2022-07-19T07:30:00.000Z\",\n            \"password_reset_by\": 1,\n            \"created_by\": 1,\n            \"group\": \"E\",\n            \"status\": \"active\",\n            \"createdAt\": \"2022-07-19T07:30:00.000Z\",\n            \"updatedAt\": \"2022-07-19T07:30:00.000Z\"\n        },\n        {\n            \"id\": 2,\n            \"fullname\": \"Jane Doe\",\n            \"dob\": \"2000-12-01T07:30:00.000Z\",\n            \"email\": \"janedoe@office.com\",\n            \"password\": \"$2b$08$fhfqItAQQuQCjMww32ad7OBu/BYm24cOoReppRo6Wk2G/eqOrlM8W\",\n            \"password_reset_date\": \"2022-07-19T07:30:00.000Z\",\n            \"password_reset_by\": 1,\n            \"created_by\": 1,\n            \"group\": \"E\",\n            \"status\": \"active\",\n            \"createdAt\": \"2022-07-19T07:30:00.000Z\",\n            \"updatedAt\": \"2022-07-19T07:30:00.000Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Employee - Admin Only",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{admin_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "fullname",
+									"value": "New Doe",
+									"type": "text"
+								},
+								{
+									"key": "dob",
+									"value": "2000-06-12",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "newdoe@office.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host_employee}}profile",
+							"host": [
+								"{{host_employee}}profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Validation Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "fullname",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "dob",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host_employee}}profile",
+									"host": [
+										"{{host_employee}}profile"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "309"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"135-E705rp6pq2IInhOvAuHXPjgFQjg\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 Jul 2022 04:10:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"success\": false,\n    \"message\": \"Validation Error\",\n    \"errors\": [\n        {\n            \"value\": \"\",\n            \"msg\": \"Fullname can not be empty!\",\n            \"param\": \"fullname\",\n            \"location\": \"body\"\n        },\n        {\n            \"value\": \"\",\n            \"msg\": \"DOB can not be empty!\",\n            \"param\": \"dob\",\n            \"location\": \"body\"\n        },\n        {\n            \"value\": \"\",\n            \"msg\": \"Email can not be empty!\",\n            \"param\": \"email\",\n            \"location\": \"body\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Email already exist",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "fullname",
+											"value": "New Doe",
+											"type": "text"
+										},
+										{
+											"key": "dob",
+											"value": "2000-06-12",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "johndoe@office.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host_employee}}profile",
+									"host": [
+										"{{host_employee}}profile"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "163"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a3-we3KGtgW20+e0QnX2pnFuM1Fx5I\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 Jul 2022 04:13:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"success\": false,\n    \"message\": \"Validation Error\",\n    \"errors\": [\n        {\n            \"value\": \"johndoe@office.com\",\n            \"msg\": \"Email already exist\",\n            \"param\": \"email\",\n            \"location\": \"body\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Employee Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{employee_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host_employee}}profile/detail/1",
+							"host": [
+								"{{host_employee}}profile"
+							],
+							"path": [
+								"detail",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "SUCCESS",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{employee_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host_employee}}profile/detail/1",
+									"host": [
+										"{{host_employee}}profile"
+									],
+									"path": [
+										"detail",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "180"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b4-cSRjuPdGGwMQqrPPxn2XbdUbuYk\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 Jul 2022 04:33:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"success\": true,\n    \"message\": \"Fetch Detail Employee Successfully\",\n    \"data\": {\n        \"id\": 1,\n        \"fullname\": \"John Doe\",\n        \"dob\": \"2000-01-01\",\n        \"email\": \"johndoe@office.com\",\n        \"status\": \"active\"\n    }\n}"
+						},
+						{
+							"name": "Employee Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{employee_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host_employee}}profile/detail/11",
+									"host": [
+										"{{host_employee}}profile"
+									],
+									"path": [
+										"detail",
+										"11"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "145"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"91-wEnlDXqUA8BcJDCUcjIFqRkvtFE\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 Jul 2022 04:31:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"success\": false,\n    \"message\": \"Validation Error\",\n    \"errors\": [\n        {\n            \"value\": \"11\",\n            \"msg\": \"Employee not found\",\n            \"param\": \"id\",\n            \"location\": \"params\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Employee - Admin Only",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{admin_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"fullname\": \"John Doe\",\n    \"dob\": \"2000-01-01\",\n    \"email\": \"johndoe@office.com\",\n    \"status\": \"active\",\n    \"reset_password\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_employee}}profile",
+							"host": [
+								"{{host_employee}}profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "SUCCESS without reset password",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": 1,\n    \"fullname\": \"John Doe\",\n    \"dob\": \"2000-01-01\",\n    \"email\": \"johndoe@office.com\",\n    \"status\": \"active\",\n    \"reset_password\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host_employee}}profile",
+									"host": [
+										"{{host_employee}}profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "160"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a0-slGb2Quq/Bk4G6yyhb+6S7PVJzo\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 Jul 2022 04:55:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"success\": true,\n    \"message\": \"Updated Successfully!\",\n    \"data\": {\n        \"fullname\": \"John Doe\",\n        \"dob\": \"2000-01-01\",\n        \"email\": \"johndoe@office.com\",\n        \"status\": \"active\"\n    }\n}"
+						},
+						{
+							"name": "SUCCESS with reset password",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": 1,\n    \"fullname\": \"John Doe\",\n    \"dob\": \"2000-01-01\",\n    \"email\": \"johndoe@office.com\",\n    \"status\": \"active\",\n    \"reset_password\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host_employee}}profile",
+									"host": [
+										"{{host_employee}}profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "183"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b7-BCWVdRZcTXldwEOpz9KP14WcxGc\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 Jul 2022 05:05:49 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"success\": true,\n    \"message\": \"Updated Successfully!\",\n    \"data\": {\n        \"fullname\": \"John Doe\",\n        \"dob\": \"2000-01-01\",\n        \"email\": \"johndoe@office.com\",\n        \"status\": \"active\",\n        \"password\": \"01Jan2000\"\n    }\n}"
+						},
+						{
+							"name": "Validation Error",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": null,\n    \"fullname\": \"\",\n    \"dob\": \"\",\n    \"email\": \"\",\n    \"status\": \"\",\n    \"reset_password\": null\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host_employee}}profile",
+									"host": [
+										"{{host_employee}}profile"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "560"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"230-cH9fDkRVjiO+k6m0wPYP1wJHf0w\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 Jul 2022 04:44:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"success\": false,\n    \"message\": \"Validation Error\",\n    \"errors\": [\n        {\n            \"value\": \"\",\n            \"msg\": \"ID can not be empty!\",\n            \"param\": \"id\",\n            \"location\": \"body\"\n        },\n        {\n            \"value\": \"\",\n            \"msg\": \"Fullname can not be empty!\",\n            \"param\": \"fullname\",\n            \"location\": \"body\"\n        },\n        {\n            \"value\": \"\",\n            \"msg\": \"DOB can not be empty!\",\n            \"param\": \"dob\",\n            \"location\": \"body\"\n        },\n        {\n            \"value\": \"\",\n            \"msg\": \"Email can not be empty!\",\n            \"param\": \"email\",\n            \"location\": \"body\"\n        },\n        {\n            \"value\": \"\",\n            \"msg\": \"Status can not be empty!\",\n            \"param\": \"status\",\n            \"location\": \"body\"\n        },\n        {\n            \"value\": \"\",\n            \"msg\": \"Reset Password can not be empty!\",\n            \"param\": \"reset_password\",\n            \"location\": \"body\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Email already exist",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": 1,\n    \"fullname\": \"John Doe\",\n    \"dob\": \"2000-01-01\",\n    \"email\": \"janedoe@office.com\",\n    \"status\": \"active\",\n    \"reset_password\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host_employee}}profile",
+									"host": [
+										"{{host_employee}}profile"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "163"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a3-GJqyOCvqx90np/WPCIE8Q5Z/wGU\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 Jul 2022 04:47:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"success\": false,\n    \"message\": \"Validation Error\",\n    \"errors\": [\n        {\n            \"value\": \"janedoe@office.com\",\n            \"msg\": \"Email already exist\",\n            \"param\": \"email\",\n            \"location\": \"body\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Password - Employee Only",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{employee_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "old_password",
+									"value": "01Jan2000",
+									"type": "text"
+								},
+								{
+									"key": "new_password",
+									"value": "new01Jan2000",
+									"type": "text"
+								},
+								{
+									"key": "confirm_password",
+									"value": "new01Jan2000",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host_employee}}profile/password",
+							"host": [
+								"{{host_employee}}profile"
+							],
+							"path": [
+								"password"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "SUCCESS",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{employee_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "old_password",
+											"value": "01Jan2000",
+											"type": "text"
+										},
+										{
+											"key": "new_password",
+											"value": "new01Jan2000",
+											"type": "text"
+										},
+										{
+											"key": "confirm_password",
+											"value": "new01Jan2000",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host_employee}}profile/password",
+									"host": [
+										"{{host_employee}}profile"
+									],
+									"path": [
+										"password"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "80"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"50-XkKz9MvtctrZntfNdT2n+A7Vdyg\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 Jul 2022 05:35:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"success\": true,\n    \"message\": \"Update password Successfully\",\n    \"data\": {}\n}"
+						},
+						{
+							"name": "Validation Error",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{employee_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "old_password",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "new_password",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "confirm_password",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host_employee}}profile/password",
+									"host": [
+										"{{host_employee}}profile"
+									],
+									"path": [
+										"password"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "357"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"165-zQqcx6C1MAIIsT5tLiZR3TTAJxs\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 Jul 2022 05:27:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"success\": false,\n    \"message\": \"Validation Error\",\n    \"errors\": [\n        {\n            \"value\": \"\",\n            \"msg\": \"Old Password can not be empty!\",\n            \"param\": \"old_password\",\n            \"location\": \"body\"\n        },\n        {\n            \"value\": \"\",\n            \"msg\": \"New Password can not be empty!\",\n            \"param\": \"new_password\",\n            \"location\": \"body\"\n        },\n        {\n            \"value\": \"\",\n            \"msg\": \"Confirm Password can not be empty!\",\n            \"param\": \"confirm_password\",\n            \"location\": \"body\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Invalid Password",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{employee_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "old_password",
+											"value": "01Jan2000!",
+											"type": "text"
+										},
+										{
+											"key": "new_password",
+											"value": "new01Jan2000",
+											"type": "text"
+										},
+										{
+											"key": "confirm_password",
+											"value": "new01Jan2000",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host_employee}}profile/password",
+									"host": [
+										"{{host_employee}}profile"
+									],
+									"path": [
+										"password"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "159"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9f-ew8Gp8MDn10S3T6k9IyMtEDXA/Q\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 Jul 2022 05:34:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"success\": false,\n    \"message\": \"Validation Error\",\n    \"errors\": [\n        {\n            \"value\": \"01Jan2000!\",\n            \"msg\": \"Invalid Password\",\n            \"param\": \"old_password\",\n            \"location\": \"body\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "General Error",
+			"item": [
+				{
+					"name": "Sample API",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{employee_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host_employee}}profile",
+							"host": [
+								"{{host_employee}}profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Unexpected Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{admin_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host_employee}}profile",
+									"host": [
+										"{{host_employee}}profile"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "90"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5a-q3ELc6rvT0BD7SbTRruMtU1x6LM\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 Jul 2022 03:34:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 500,\n    \"success\": false,\n    \"message\": \"Unexpected Error\",\n    \"errors\": \"Some error occurred\"\n}"
+						},
+						{
+							"name": "Empty Token",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host_employee}}profile",
+									"host": [
+										"{{host_employee}}profile"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "93"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5d-CpACwtM7uv7QT4Ya1g0R3fOE/mA\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 Jul 2022 03:31:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 403,\n    \"success\": false,\n    \"message\": \"Unauthorised Access\",\n    \"errors\": \"Unauthorised Access\"\n}"
+						},
+						{
+							"name": "Invalid Token",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{admin_token}}F",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host_employee}}profile",
+									"host": [
+										"{{host_employee}}profile"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "127"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"7f-swV38TuAhj+6Ne2y1Za/a8bz+nI\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 Jul 2022 03:33:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 500,\n    \"success\": false,\n    \"message\": \"Unexpected Error\",\n    \"errors\": {\n        \"name\": \"JsonWebTokenError\",\n        \"message\": \"invalid signature\"\n    }\n}"
+						},
+						{
+							"name": "Invalid User Group",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{employee_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host_employee}}profile",
+									"host": [
+										"{{host_employee}}profile"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "93"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5d-CpACwtM7uv7QT4Ya1g0R3fOE/mA\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 Jul 2022 03:34:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 403,\n    \"success\": false,\n    \"message\": \"Unauthorised Access\",\n    \"errors\": \"Unauthorised Access\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host_employee",
+			"value": "http://localhost:9002/",
+			"type": "string"
+		}
+	]
+}
